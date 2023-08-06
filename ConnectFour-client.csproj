@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -73,18 +73,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutBox1.cs">
+    <Compile Include="Custom Forms\AboutBox1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutBox1.Designer.cs">
+    <Compile Include="Custom Forms\AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Disc.cs" />
-    <Compile Include="databaseView.cs">
+    <Compile Include="Classes\Disc.cs" />
+    <Compile Include="Classes\Game.cs" />
+    <Compile Include="Custom Forms\databaseView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="databaseView.Designer.cs">
+    <Compile Include="Custom Forms\databaseView.Designer.cs">
       <DependentUpon>databaseView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Forms\GameRecordingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Custom Forms\GameRecordingsForm.Designer.cs">
+      <DependentUpon>GameRecordingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Functions\MainWindow_API.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Functions\MainWindow_GameFuncs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Functions\MainWindow_Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Functions\MainWindow_OnClickFuncs.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -92,13 +111,23 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AboutBox1.resx">
+    <Compile Include="Custom Forms\WellcomeUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Custom Forms\WellcomeUser.Designer.cs">
+      <DependentUpon>WellcomeUser.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Custom Forms\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="databaseView.resx">
+    <EmbeddedResource Include="Custom Forms\databaseView.resx">
       <DependentUpon>databaseView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Custom Forms\GameRecordingsForm.resx">
+      <DependentUpon>GameRecordingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -113,6 +142,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Custom Forms\WellcomeUser.resx">
+      <DependentUpon>WellcomeUser.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -140,13 +172,25 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="playersDB.mdf">
+    <Content Include="DB\dbGames.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="playersDB_log.ldf">
+    <Content Include="DB\dbGames_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>dbGames.mdf</DependentUpon>
+    </Content>
+    <Content Include="DB\playersDB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\playersDB_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>playersDB.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\btn-down %28Custom%29 %284%29.jpeg" />
+    <None Include="Resources\btn-down %28Custom%29 %281%29.jpeg" />
+    <None Include="Resources\btn-down %28Custom%29 %283%29.jpeg" />
+    <None Include="Resources\btn-down %28Custom%29.jpeg" />
+    <None Include="Resources\btn-down.jpeg" />
     <None Include="Resources\צילום מסך 2023-07-08 ב-21.11.55.png" />
     <None Include="Resources\connect-four-board.jpg" />
     <None Include="Resources\connect-four-1-removebg.png" />
