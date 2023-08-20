@@ -23,14 +23,20 @@ namespace BallsGame_315903518
 
         public void Move(int height, int width)
         {
-            if (Position.Y != height - (Size) ) 
+			if (Math.Abs(discStopPosition - Position.Y ) < 60 )//בדיקת מרחק גדול 
             {
-                Position = new Point(Position.X, Position.Y + 12);
+				Position = new Point(Position.X, Position.Y + 3);
+
+			}
+			else if (Position.Y != height - (Size) ) 
+            {
+               // Console.WriteLine("Position Y: " + Position.Y + ", stop position: " + discStopPosition );
+                Position = new Point(Position.X, Position.Y + 15);
 
             }
             else
             {
-                isMoving = false;
+				isMoving = false;
             }
            
         }

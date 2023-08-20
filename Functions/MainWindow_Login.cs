@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System;
 using System.Windows.Forms;
 using System.Drawing;
+using BallsGame_315903518.Custom_Forms;
 
 namespace BallsGame_315903518
 {
@@ -25,14 +26,26 @@ namespace BallsGame_315903518
             DialogResult dialogResult = DialogResult.None;
             do
             {
-                dialogResult = InputBox("Welcome To Connect Four", "Please Log In To Play\nEnter your ID:\n", ref id);
+                using (var form = new LoginForm())
+                {
+
+                    dialogResult = form.ShowDialog();
+                    await Console.Out.WriteLineAsync("dialogResult: " + dialogResult);
+
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        await Console.Out.WriteLineAsync("ID from user: " + id);
+                        id = form.userID; 
+                      
+                    }
+                }
                 if (dialogResult == DialogResult.Cancel) // User cancels --> close the program
                 {
                     System.Environment.Exit(1);
 
                 }
 
-            } while (id == ""); // do not allow empty IDs
+            } while (id == "" ); // do not allow empty IDs
 
             // Check if exists in database
             Player currentPlayer = null;
@@ -69,6 +82,8 @@ namespace BallsGame_315903518
 
             //initialize game parameters
             currentGame.PlayerID = currentPlayer.Id;
+            id = currentPlayer.Id.ToString(); 
+
             currentGame.StartTime = DateTime.Now;
             stopwatch.Start();
 

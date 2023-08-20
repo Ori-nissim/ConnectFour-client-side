@@ -158,6 +158,7 @@ namespace BallsGame_315903518
 
         private async void playGameRecording(int[] moves)
         {
+            isFromRecording = true;
             for (int i = 0; i < moves.Length; i++)
             {
                 insertDiscEventHandler(moves[i]);
@@ -174,8 +175,9 @@ namespace BallsGame_315903518
                 {
                     discsArray[i].Move(ClientRectangle.Height, ClientRectangle.Width);
 
-                    if (discsArray[i].Position.Y < 0 || discsArray[i].Position.Y + discsArray[i].Size - discsArray[i].discStopPosition > pictureBox1.Height - 675)
-                    {
+                    if (discsArray[i].Position.Y < 0 || discsArray[i].Position.Y + discsArray[i].Size - discsArray[i].discStopPosition > pictureBox1.Height - 675) //675
+
+					{
                         discsArray[i].isMoving = false;
                     }
                 }
@@ -196,6 +198,10 @@ namespace BallsGame_315903518
         private void GameRecordingForm_MovesSelected(object sender, string moves)
         {
             int[] movesArray = moves.Split(',').Select(int.Parse).ToArray();
+            
+            for (int i =0; i < movesArray.Length; i ++ )
+            Console.WriteLine("$$$: " + movesArray[i]);
+
             playGameRecording(movesArray);
         }
         private void btnDatabase_Click(object sender, EventArgs e)
@@ -269,20 +275,24 @@ namespace BallsGame_315903518
         public void saveGameAndReset()
         {
             stopwatch.Stop();
-            Console.WriteLine("Game time: " + stopwatch.ElapsedMilliseconds);
+
             currentGame.Duration = stopwatch.ElapsedMilliseconds / 1000;
+            currentGame.Moves = GetMovesAsString();
+
             discCounter = 0;
             discsArray = new Disc[100];
-
-
             discs = new int[6, 7];
             takenSpotsInColumn = new int[7];
 
-            // Save game in server DB
-            saveGameInServer(currentGame);
-            // Save game recording in local DB
-            // TODO - change the hardcoded ID
-            savePlayerDetails(GetMovesAsString(), 123);  // converts the linked list of moves to this format - "1,3,4,5,4" - String
+            if (!isFromRecording)
+            {
+                // Save game in server DB
+                saveGameInServer(currentGame);
+
+                // Save game recording in local DB
+                savePlayerDetails(GetMovesAsString(), Convert.ToInt32(id));  // converts the linked list of moves to this format - "1,3,4,5,4" - String
+            }
+
             resetCurrentColor();
             lblballsCouinter.Text = "Turn number: " + discCounter;
 
@@ -290,8 +300,27 @@ namespace BallsGame_315903518
             isGameActive = true;
             currentGame.StartTime = DateTime.Now;
 
-            //name = "Guest";
-            //lblHello.Text = "Hello, " + name;
+            // give information to the user
+            if (isFromRecording)
+            {
+                DialogResult dr = MessageBox.Show(
+                    "You Can Start a New Game",
+                    "Game Reseted",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.None
+                    );
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show(
+                    "You Can Start a New Game",
+                    "Game Reseted and Saved",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.None
+                    );
+            }
+
+            isFromRecording = false;
 
         }
 
@@ -328,28 +357,6 @@ namespace BallsGame_315903518
                 e.Graphics.FillEllipse(discsArray[i].Brush, new Rectangle(discsArray[i].Position, new Size(discsArray[i].Size, discsArray[i].Size)));
 
             }
-        }
-
-     
-        private void createNewBall()
-        {
-            Disc ball = new Disc();
-
-            ball.Position = new Point(30, 0);
-            ball.isMoving = true;
-
-            Color randomColor = Color.FromArgb(255, 0, 0);
-
-            ball.Pen = new Pen(randomColor);
-            ball.Brush = new SolidBrush(randomColor);
-
-            ball.Size = 30;
-
-            // rectangle for filling the ball with color
-            ball.rectangle = new Rectangle(ball.Position, new Size(ball.Size, ball.Size));
-
-            discsArray[discCounter++] = ball;
-            lblballsCouinter.Text = "Turn number: " + discCounter;
         }
 
         private void createNewBall(int location, int discStopPosition, DiscColor color)
@@ -410,7 +417,7 @@ namespace BallsGame_315903518
             }
 
             // Insert move to game recording
-            SaveMove(location);
+            if (!isFromRecording) SaveMove(location);//save to link list
 
 
             int discStopPosition = calculatDiscHeight(discs, takenSpotsInColumn[location - 1]);
@@ -422,7 +429,7 @@ namespace BallsGame_315903518
             // Now check for win - if 4 discs has been inserted already
             if (discCounter >= 4)
             {
-                if (CheckForWin(discs, (int)currentColor))  // returns True if the current player has won
+                if (CheckForWin(discs, (int)currentColor) && isFromRecording == false)  // returns True if the current player has won
                 {
                     isGameActive = false; // disable actions
 
@@ -456,7 +463,7 @@ namespace BallsGame_315903518
             PrintArray(discs);
             changeCurrentColor();
 
-            if (currentColor == DiscColor.Yellow)
+            if (currentColor == DiscColor.Yellow && !isFromRecording)
             {
                 Console.WriteLine("Function runs");
                 blockButtons(true);

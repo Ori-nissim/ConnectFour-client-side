@@ -87,6 +87,12 @@
     <Compile Include="Custom Forms\databaseView.Designer.cs">
       <DependentUpon>databaseView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Custom Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Custom Forms\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Custom Forms\GameRecordingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Custom Forms\GameRecordingsForm.resx">
       <DependentUpon>GameRecordingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Custom Forms\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -186,6 +195,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>playersDB.mdf</DependentUpon>
     </Content>
+    <None Include="Resources\user icon.png" />
+    <None Include="Resources\connect four icon.png" />
     <None Include="Resources\btn-down %28Custom%29 %284%29.jpeg" />
     <None Include="Resources\btn-down %28Custom%29 %281%29.jpeg" />
     <None Include="Resources\btn-down %28Custom%29 %283%29.jpeg" />

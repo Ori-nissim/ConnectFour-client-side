@@ -19,6 +19,7 @@ namespace BallsGame_315903518
         public GameRecordingsForm(int id)
         {
             currentPlayerID = id;
+            Console.WriteLine(id);
             InitializeComponent();
         }
 
@@ -76,7 +77,7 @@ namespace BallsGame_315903518
                 connection.Open();
                 string moves = command.ExecuteScalar() as string;
                 // The ExecuteScalar method returns the first column of the first row, cast it to string.
-
+                Console.WriteLine(moves);
                 return moves;
             }
         }
@@ -94,11 +95,24 @@ namespace BallsGame_315903518
         {
 
             // When the OK button is clicked, close the form
-            int selectedGameId = (int)GamescomboBox.SelectedItem;
-            string moves = GetSelectedGame(selectedGameId);
-            Console.WriteLine(moves);
+           
+            if (GamescomboBox.SelectedItem == null)
+            {
+				DialogResult dr = MessageBox.Show(
+				   "You must select game recording!!!",
+				   "Error ",
+				   MessageBoxButtons.OK,
+				   MessageBoxIcon.Error
+				   );
+                this.Close();
+                return;
+			}
+			int selectedGameId = (int)GamescomboBox.SelectedItem;
+			string moves = GetSelectedGame(selectedGameId);
+            Console.WriteLine("Game moves from local db: " + moves);
 
             // Trigger the MovesSelected event and pass the moves string
+           
             MovesSelected?.Invoke(this, moves);
             this.Close();
             

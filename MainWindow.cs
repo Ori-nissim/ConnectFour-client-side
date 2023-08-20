@@ -29,24 +29,24 @@ namespace BallsGame_315903518
     {
         // constants paths
         public string NEW_MOVE_PATH = "api/Players/move";
-
+        public bool isFromRecording = false;
         public Game currentGame = new Game();
 
         public DiscColor currentColor = DiscColor.Red;
         public bool firstClickOnPlus = true;
         public bool isGameActive = true; // change to false after we add authentication
-        public string id = "123";
+        public string id = string.Empty; 
         public string name = string.Empty;
 
         internal System.Windows.Forms.Timer timer;
         internal Stopwatch stopwatch = new Stopwatch();
 
-        internal Disc[] discsArray = new Disc[100];
+        internal Disc[] discsArray = new Disc[100]; //all discs
         internal int discCounter = 0;
 
-        internal int[,] discs = new int[6, 7];
-        internal int[] takenSpotsInColumn = new int[7];
-        internal LinkedList<int> moves = new LinkedList<int>();
+        internal int[,] discs = new int[6, 7];// rectangle matrix 
+        internal int[] takenSpotsInColumn = new int[7];// מערך שמחזיק כמה מקומות תפוסים כל עמודה 
+        internal LinkedList<int> moves = new LinkedList<int>();// מחזיק את הצעדים
 
         // WEB API 
         internal static HttpClient client = new HttpClient();

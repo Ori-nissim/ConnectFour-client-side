@@ -34,8 +34,6 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnEndGame = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnAbout = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnDatabase = new System.Windows.Forms.ToolStripLabel();
             this.btnExit = new System.Windows.Forms.ToolStripLabel();
             this.lblballsCouinter = new System.Windows.Forms.ToolStripLabel();
@@ -62,8 +60,6 @@
             this.toolStripSeparator5,
             this.btnEndGame,
             this.toolStripSeparator1,
-            this.btnAbout,
-            this.toolStripSeparator3,
             this.btnDatabase,
             this.btnExit,
             this.lblballsCouinter,
@@ -79,8 +75,9 @@
             // 
             // lblHello
             // 
+            this.lblHello.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHello.Name = "lblHello";
-            this.lblHello.Size = new System.Drawing.Size(71, 22);
+            this.lblHello.Size = new System.Drawing.Size(75, 22);
             this.lblHello.Text = "Hello, Guest";
             // 
             // toolStripSeparator5
@@ -100,18 +97,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // btnAbout
-            // 
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(40, 22);
-            this.btnAbout.Text = "About";
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
             // btnDatabase
             // 
             this.btnDatabase.Name = "btnDatabase";
@@ -127,6 +112,7 @@
             this.btnExit.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
             this.btnExit.Size = new System.Drawing.Size(73, 22);
             this.btnExit.Text = "E - Exit";
+            this.btnExit.Visible = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblballsCouinter
@@ -146,8 +132,9 @@
             // 
             // lblCurrentTurn
             // 
+            this.lblCurrentTurn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrentTurn.Name = "lblCurrentTurn";
-            this.lblCurrentTurn.Size = new System.Drawing.Size(80, 22);
+            this.lblCurrentTurn.Size = new System.Drawing.Size(84, 22);
             this.lblCurrentTurn.Text = "Current Turn: ";
             // 
             // lblPlayerColor
@@ -275,8 +262,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel btnEndGame;
-        private System.Windows.Forms.ToolStripLabel btnAbout;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel btnDatabase;
         private System.Windows.Forms.ToolStripLabel btnExit;
         private System.Windows.Forms.ToolStripLabel lblHello;
